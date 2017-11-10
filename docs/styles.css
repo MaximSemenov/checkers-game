@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css?family=Encode+Sans+Expanded');
+body {
+    font-family: 'Encode Sans Expanded', sans-serif;
+}
+
+table#chessBoard {
+    width: 600px;
+    height: 600px;
+    border: 1px solid black;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+tr {
+    background-color: pink;
+    height: 75px;
+}
+
+td {
+    width: 75px;
+    border: 1px solid black;
+}
+
+td.white {
+    background-color: whitesmoke;
+}
+
+td.brown {
+    background-color: burlywood;
+}
+
+td.blue {
+    background-color: deepskyblue;
+}
+
+ol {
+    float: left;
+}
