@@ -6,7 +6,7 @@ export default class Chessboard {
         this.myCell = {
             cell: null,
             class: null
-        
+
         };
 
 
@@ -17,6 +17,7 @@ export default class Chessboard {
     setChessBoard(number, condition) {
 
         let tr = document.createElement('tr');
+        tr.id = 'row' + this.counter;
         this.chessBoard.appendChild(tr);
 
         let cellYNumber = 0;
@@ -26,8 +27,7 @@ export default class Chessboard {
             let cell = document.createElement('td');
             cell.setAttribute('data-cell-x', cellYNumber);
             cell.setAttribute('data-cell-y', this.counter);
-            cell.textContent = `x ${cellYNumber}
-             y ${this.counter}`;
+            // cell.textContent = `x ${cellYNumber} y ${this.counter}`;
 
             if (i % 2 === 0) {
                 cell.className = 'white'
@@ -83,7 +83,7 @@ export default class Chessboard {
 
     shiftCell(e) {
 
-        console.log(this)
+        // console.log(this)
 
         let x,
             y,
