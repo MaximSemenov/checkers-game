@@ -14,7 +14,7 @@ export default class Chessboard {
         document.addEventListener('keydown', this.shiftCell.bind(this), false);
     }
 
-    setChessBoard(number, condition) {
+    createChessBoard(number, condition) {
 
         let tr = document.createElement('tr');
         tr.id = 'row' + this.counter;
@@ -46,7 +46,7 @@ export default class Chessboard {
         if (this.counter !== 7) {
 
             this.counter++;
-            this.counter % 2 === 1 ? this.setChessBoard(1, 9) : this.setChessBoard(0, 8);
+            this.counter % 2 === 1 ? this.createChessBoard(1, 9) : this.createChessBoard(0, 8);
         }
 
         return;
