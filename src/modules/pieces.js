@@ -1,11 +1,10 @@
 export default class Pieces {
 
-    constructor(chessBoard, player1Color, player2Color) {
+    constructor(createdChessBoard) {
+        this.chessBoardWithPieces = createdChessBoard.chessBoardTable;
 
-        this.color1 = player1Color;
-        this.color2 = player2Color;
-        this.chessBoard = chessBoard;
-
+console.log (this.chessBoardWithPieces)
+        this.chessBoardWithPieces.addEventListener('click', () => alert ('helow'), false);
     }
 
     setAllPieces() {
@@ -17,21 +16,18 @@ export default class Pieces {
     #row6 td.brown,
     #row7 td.brown`)
 
-
-        let pieceColor = this.color1;
+        let className = 'player1'
         for (let cell of setPositions) {
- 
+            cell.setAttribute('data-occupied', '');
             if (cell === setPositions[12]) {
-                pieceColor = this.color2;
+                className = 'player2'
             }
-            cell.appendChild(document.createElement('div')).style.backgroundColor = pieceColor;
+            cell.appendChild(document.createElement('div')).classList.add(className)
         }
 
     }
 
-assignPlayers () {
-    
-}
+
 
 
 }

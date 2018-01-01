@@ -1,7 +1,7 @@
 export default class Chessboard {
 
     constructor(boardId) {
-        this.chessBoard = document.getElementById(boardId);
+        this.chessBoardTable = document.getElementById(boardId);
         this.counter = 0;
         this.myCell = {
             cell: null,
@@ -10,7 +10,7 @@ export default class Chessboard {
         };
 
 
-        this.chessBoard.addEventListener('click', this.setByClick.bind(this), false);
+        // this.chessBoard.addEventListener('click', this.setByClick.bind(this), false);
         document.addEventListener('keydown', this.shiftCell.bind(this), false);
     }
 
@@ -18,7 +18,7 @@ export default class Chessboard {
 
         let tr = document.createElement('tr');
         tr.id = 'row' + this.counter;
-        this.chessBoard.appendChild(tr);
+        this.chessBoardTable.appendChild(tr);
 
         let cellYNumber = 0;
 
