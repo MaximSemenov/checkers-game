@@ -26,18 +26,19 @@ div {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    border: 2px solid darkgoldenrod;
+    border: 2px solid dimgray;
     margin: auto;
-    transition : border 500ms ease-out;
+    transition : border 1000ms ease-out;
 }
 
 .player1 {
-    background-color: #63381B;
 
+    background: radial-gradient(circle, antiquewhite, sienna, sandybrown );
 }
 
 .player2 {
-    background-color: firebrick;
+ 
+    background: radial-gradient(circle, antiquewhite, darkkhaki, wheat);
 }
 
 td.white {
@@ -52,8 +53,8 @@ td.blue {
     background-color: deepskyblue;
 }
 
-.selectedPiece {
-    border : 2px solid red;   
+div.selectedPiece {
+    border : 2px solid tomato;   
 }
 
 ol {

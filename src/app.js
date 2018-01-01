@@ -6,12 +6,11 @@ const createdChessBoard = new Chessboard('chessBoard')
 createdChessBoard.createChessBoard(0, 8);
 
 
-console.log(createdChessBoard)
 
 const pieces = new Pieces(createdChessBoard);
 pieces.setAllPieces();
 
-console.log(createdChessBoard)
+
 
 
 // console.log (createdChessBoard.chessBoard);
