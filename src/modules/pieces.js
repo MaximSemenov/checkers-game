@@ -2,15 +2,20 @@ export default class Pieces {
 
     constructor(createdChessBoard) {
         this.chessBoardWithPieces = createdChessBoard.chessBoardTable;
+        this.selectedPiece = undefined;
 
         this.chessBoardWithPieces.addEventListener('click', (e) => {
-            console.dir(e.target)
-            console.dir(event.currentTarget)
 
-           // if (e.target.hasAttribute('data-occupied')) {
-                e.target.classList.add('selectedPiece')
-                console.log (e.target + 'has it')
-           // }
+            e.target.classList.add('selectedPiece')
+            if (this.selectedPiece) {
+                this.selectedPiece.classList.remove('selectedPiece');
+                if (this.selectedPiece === e.target) {
+                    this.selectedPiece = undefined
+                    return;
+                }
+            }
+            this.selectedPiece = e.target;
+
         }, false);
     }
 

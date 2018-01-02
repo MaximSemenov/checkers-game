@@ -28,16 +28,31 @@ div {
     border-radius: 50%;
     border: 2px solid dimgray;
     margin: auto;
-    transition : border 1000ms ease-out;
+    transition: border 500ms ease-out;
+}
+
+div:hover {
+    cursor: pointer;
+    animation: shake 250ms 2 linear ;
+}
+
+@keyframes shake {
+    0% {
+        transform: translate(1px, 0);
+    }
+    50% {
+        transform: translate(-1px, 0);
+    }
+    100% {
+        transform: translate(0, 0);
+    }
 }
 
 .player1 {
-
-    background: radial-gradient(circle, antiquewhite, sienna, sandybrown );
+    background: radial-gradient(circle, antiquewhite, sienna, sandybrown);
 }
 
 .player2 {
- 
     background: radial-gradient(circle, antiquewhite, darkkhaki, wheat);
 }
 
@@ -54,10 +69,9 @@ td.blue {
 }
 
 div.selectedPiece {
-    border : 2px solid tomato;   
+    border: 2px solid tomato;
 }
 
 ol {
     float: left;
 }
-
