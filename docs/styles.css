@@ -12,14 +12,13 @@ table#chessBoard {
 }
 
 tr {
-    background-color: pink;
     height: 75px;
 }
 
 td {
     width: 75px;
     border: 1px solid black;
-    text-align: center;
+
 }
 
 div {
@@ -32,8 +31,9 @@ div {
 }
 
 div:hover {
-    cursor: pointer;
     animation: shake 250ms 2 linear ;
+    cursor: pointer;
+
 }
 
 @keyframes shake {
@@ -47,6 +47,7 @@ div:hover {
         transform: translate(0, 0);
     }
 }
+
 
 .player1 {
     background: radial-gradient(circle, antiquewhite, sienna, sandybrown);
@@ -64,13 +65,20 @@ td.brown {
     background-color: burlywood;
 }
 
-td.blue {
-    background-color: deepskyblue;
-}
 
 div.selectedPiece {
+  
     border: 2px solid tomato;
 }
+
+.selectedCell {
+    background-color: #856e53;
+    transition: background-color 600ms ease-out;
+   
+     
+}
+
+
 
 ol {
     float: left;

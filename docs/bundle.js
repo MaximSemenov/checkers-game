@@ -1,1 +1,382 @@
-!function(e){function t(r){if(l[r])return l[r].exports;var a=l[r]={i:r,l:!1,exports:{}};return e[r].call(a.exports,a,a.exports,t),a.l=!0,a.exports}var l={};t.m=e,t.c=l,t.d=function(e,l,r){t.o(e,l)||Object.defineProperty(e,l,{configurable:!1,enumerable:!0,get:r})},t.n=function(e){var l=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(l,"a",l),l},t.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},t.p="",t(t.s=0)}([function(e,t,l){"use strict";function r(e){return e&&e.__esModule?e:{default:e}}var a=l(1),n=r(a),c=l(2),s=r(c),o=l(3),i=(r(o),new n.default("chessBoard"));i.createChessBoard(0,8);var u=new s.default(i);u.setAllPieces(),console.dir(u)},function(e,t,l){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}Object.defineProperty(t,"__esModule",{value:!0});var a=function(){function e(e,t){for(var l=0;l<t.length;l++){var r=t[l];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,l,r){return l&&e(t.prototype,l),r&&e(t,r),t}}(),n=function(){function e(t){r(this,e),this.chessBoardTable=document.getElementById(t),this.counter=0,this.myCell={cell:null,class:null},document.addEventListener("keydown",this.shiftCell.bind(this),!1)}return a(e,[{key:"createChessBoard",value:function(e,t){var l=document.createElement("tr");l.id="row"+this.counter,this.chessBoardTable.appendChild(l);for(var r=0,a=e;a<t;a++){var n=document.createElement("td");n.setAttribute("data-cell-x",r),n.setAttribute("data-cell-y",this.counter),n.className=a%2==0?"white":"brown",l.appendChild(n),r++}7!==this.counter&&(this.counter++,this.counter%2==1?this.createChessBoard(1,9):this.createChessBoard(0,8))}},{key:"setByClick",value:function(e){this.myCell.cell&&(this.myCell.cell.className=this.myCell.class),this.myCell.cell=e.target,this.myCell.class=e.target.className,e.target.className="blue"}},{key:"setByKeyBoard",value:function(e){this.myCell.cell&&(this.myCell.cell.className=this.myCell.class),this.myCell.cell=e,this.myCell.class=e.className,e.className="blue"}},{key:"shiftCell",value:function(e){var t=void 0,l=void 0;switch(t=this.myCell.cell.dataset.cellX,l=this.myCell.cell.dataset.cellY,e.keyCode){case 37:this.goLeft(t,l);break;case 38:this.goUp(t,l);break;case 39:this.goRight(t,l);break;case 40:this.goDown(t,l)}}},{key:"goUp",value:function(e,t){if(0!=t){var l=document.querySelector("[data-cell-x='"+e+"'][data-cell-y='"+(t-1)+"']");this.setByKeyBoard(l)}}},{key:"goLeft",value:function(e,t){if(0!=e){var l=document.querySelector("[data-cell-x='"+(e-1)+"'][data-cell-y='"+t+"']");this.setByKeyBoard(l)}}},{key:"goRight",value:function(e,t){if(7!=e){var l=document.querySelector("[data-cell-x='"+(+e+1)+"'][data-cell-y='"+t+"']");this.setByKeyBoard(l)}}},{key:"goDown",value:function(e,t){if(7!=t){var l=document.querySelector("[data-cell-x='"+e+"'][data-cell-y='"+(+t+1)+"']");this.setByKeyBoard(l)}}}]),e}();t.default=n},function(e,t,l){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}Object.defineProperty(t,"__esModule",{value:!0});var a=function(){function e(e,t){for(var l=0;l<t.length;l++){var r=t[l];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,l,r){return l&&e(t.prototype,l),r&&e(t,r),t}}(),n=function(){function e(t){var l=this;r(this,e),this.chessBoardWithPieces=t.chessBoardTable,this.selectedPiece=void 0,this.chessBoardWithPieces.addEventListener("click",function(e){if(e.target.classList.add("selectedPiece"),l.selectedPiece&&(l.selectedPiece.classList.remove("selectedPiece"),l.selectedPiece===e.target))return void(l.selectedPiece=void 0);l.selectedPiece=e.target},!1)}return a(e,[{key:"setAllPieces",value:function(){var e=chessBoard.querySelectorAll("\n    #row0 td.brown,\n    #row1 td.brown,\n    #row2 td.brown,\n    #row5 td.brown,\n    #row6 td.brown,\n    #row7 td.brown"),t="player1",l=!0,r=!1,a=void 0;try{for(var n,c=e[Symbol.iterator]();!(l=(n=c.next()).done);l=!0){var s=n.value;s.setAttribute("data-occupied",""),s===e[12]&&(t="player2"),s.appendChild(document.createElement("div")).classList.add(t)}}catch(e){r=!0,a=e}finally{try{!l&&c.return&&c.return()}finally{if(r)throw a}}}}]),e}();t.default=n},function(e,t,l){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}Object.defineProperty(t,"__esModule",{value:!0});var a=function e(){r(this,e)};t.default=a}]);
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _board = __webpack_require__(1);
+
+var _board2 = _interopRequireDefault(_board);
+
+var _pieces = __webpack_require__(2);
+
+var _pieces2 = _interopRequireDefault(_pieces);
+
+var _gameLogic = __webpack_require__(3);
+
+var _gameLogic2 = _interopRequireDefault(_gameLogic);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var createdChessBoard = new _board2.default('chessBoard');
+createdChessBoard.createChessBoard(0, 8);
+
+var pieces = new _pieces2.default(createdChessBoard);
+pieces.setAllPieces();
+
+// console.log (createdChessBoard.chessBoard);
+
+// this.createdChessBoard.addEventListener('click', () => alert ('helow'), false);
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Chessboard = function () {
+    function Chessboard(boardId) {
+        _classCallCheck(this, Chessboard);
+
+        this.chessBoardTable = document.getElementById(boardId);
+        this.counter = 0;
+        this.myCell = {
+            cell: null,
+            class: null
+
+        };
+
+        // this.chessBoard.addEventListener('click', this.setByClick.bind(this), false);
+        document.addEventListener('keydown', this.shiftCell.bind(this), false);
+    }
+
+    _createClass(Chessboard, [{
+        key: 'createChessBoard',
+        value: function createChessBoard(number, condition) {
+
+            var tr = document.createElement('tr');
+            tr.id = 'row' + this.counter;
+            this.chessBoardTable.appendChild(tr);
+
+            var cellYNumber = 0;
+
+            for (var i = number; i < condition; i++) {
+
+                var cell = document.createElement('td');
+                cell.setAttribute('data-cell-x', cellYNumber);
+                cell.setAttribute('data-cell-y', this.counter);
+                // cell.textContent = `x ${cellYNumber} y ${this.counter}`;
+
+                if (i % 2 === 0) {
+                    cell.className = 'white';
+                } else {
+                    cell.className = 'brown';
+                }
+
+                tr.appendChild(cell);
+                cellYNumber++;
+            }
+
+            if (this.counter !== 7) {
+
+                this.counter++;
+                this.counter % 2 === 1 ? this.createChessBoard(1, 9) : this.createChessBoard(0, 8);
+            }
+
+            return;
+        }
+    }, {
+        key: 'setByClick',
+        value: function setByClick(e) {
+            if (this.myCell.cell) {
+                this.myCell.cell.className = this.myCell.class;
+            }
+
+            this.myCell.cell = e.target;
+            this.myCell.class = e.target.className;
+            e.target.className = 'blue';
+        }
+    }, {
+        key: 'setByKeyBoard',
+        value: function setByKeyBoard(element) {
+
+            if (this.myCell.cell) {
+                this.myCell.cell.className = this.myCell.class;
+            }
+
+            this.myCell.cell = element;
+            this.myCell.class = element.className;
+
+            element.className = 'blue';
+        }
+    }, {
+        key: 'shiftCell',
+        value: function shiftCell(e) {
+
+            // console.log(this)
+
+            var x = void 0,
+                y = void 0,
+                keyCode = void 0;
+
+            x = this.myCell.cell.dataset.cellX;
+            y = this.myCell.cell.dataset.cellY;
+            keyCode = e.keyCode;
+
+            switch (keyCode) {
+
+                case 37:
+                    this.goLeft(x, y);
+                    break;
+
+                case 38:
+                    this.goUp(x, y);
+                    break;
+
+                case 39:
+                    this.goRight(x, y);
+                    break;
+
+                case 40:
+                    this.goDown(x, y);
+                    break;
+
+            }
+        }
+    }, {
+        key: 'goUp',
+        value: function goUp(x, y) {
+
+            if (y == 0) {
+                return;
+            }
+            var newCell = document.querySelector('[data-cell-x=\'' + x + '\'][data-cell-y=\'' + (y - 1) + '\']');
+            this.setByKeyBoard(newCell);
+        }
+    }, {
+        key: 'goLeft',
+        value: function goLeft(x, y) {
+
+            if (x == 0) {
+                return;
+            }
+            var newCell = document.querySelector('[data-cell-x=\'' + (x - 1) + '\'][data-cell-y=\'' + y + '\']');
+            this.setByKeyBoard(newCell);
+        }
+    }, {
+        key: 'goRight',
+        value: function goRight(x, y) {
+
+            if (x == 7) {
+                return;
+            }
+            var newCell = document.querySelector('[data-cell-x=\'' + (+x + 1) + '\'][data-cell-y=\'' + y + '\']');
+            this.setByKeyBoard(newCell);
+        }
+    }, {
+        key: 'goDown',
+        value: function goDown(x, y) {
+            if (y == 7) {
+                return;
+            }
+            var newCell = document.querySelector('[data-cell-x=\'' + x + '\'][data-cell-y=\'' + (+y + 1) + '\']');
+            this.setByKeyBoard(newCell);
+        }
+    }]);
+
+    return Chessboard;
+}();
+
+exports.default = Chessboard;
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Pieces = function () {
+    function Pieces(createdChessBoard) {
+        _classCallCheck(this, Pieces);
+
+        this.chessBoardWithPieces = createdChessBoard.chessBoardTable;
+        this.selectedPiece = undefined;
+        this.chessBoardWithPieces.addEventListener('click', this.selectPiece, false);
+        this.chessBoardWithPieces.addEventListener('click', this.selectPossibleCells, false);
+    }
+
+    _createClass(Pieces, [{
+        key: 'selectPiece',
+        value: function selectPiece(e) {
+
+            e.target.classList.add('selectedPiece');
+            if (this.selectedPiece) {
+                this.selectedPiece.classList.remove('selectedPiece');
+                if (this.selectedPiece === e.target) {
+                    this.selectedPiece = undefined;
+                    return;
+                }
+            }
+            this.selectedPiece = e.target;
+        }
+    }, {
+        key: 'selectPossibleCells',
+        value: function selectPossibleCells(e) {
+
+            var el = e.target;
+            var y = el.parentElement.dataset.cellY;
+            var x = el.parentElement.dataset.cellX;
+
+            if (el.classList.contains('player1')) {
+                document.querySelector('[data-cell-x=\'' + (x - 1) + '\'][data-cell-y=\'' + (+y + 1) + '\']').className = 'selectedCell';
+
+                document.querySelector('[data-cell-x=\'' + (+x + 1) + '\'][data-cell-y=\'' + (+y + 1) + '\']').className = 'selectedCell';
+            }
+        }
+    }, {
+        key: 'setAllPieces',
+        value: function setAllPieces() {
+            var setPositions = chessBoard.querySelectorAll('\n    #row0 td.brown,\n    #row1 td.brown,\n    #row2 td.brown,\n    #row5 td.brown,\n    #row6 td.brown,\n    #row7 td.brown');
+
+            var className = 'player1';
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = setPositions[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var cell = _step.value;
+
+                    cell.setAttribute('data-occupied', 'true');
+                    if (cell === setPositions[12]) {
+                        className = 'player2';
+                    }
+                    cell.appendChild(document.createElement('div')).classList.add(className);
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+        }
+    }]);
+
+    return Pieces;
+}();
+
+exports.default = Pieces;
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var gameLogic = function gameLogic() {
+    _classCallCheck(this, gameLogic);
+};
+
+exports.default = gameLogic;
+
+/***/ })
+/******/ ]);

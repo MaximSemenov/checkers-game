@@ -10,7 +10,7 @@ createdChessBoard.createChessBoard(0, 8);
 const pieces = new Pieces(createdChessBoard);
 pieces.setAllPieces();
 
-console.dir(pieces)
+
 
 
 // console.log (createdChessBoard.chessBoard);
