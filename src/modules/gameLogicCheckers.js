@@ -8,23 +8,38 @@ export default class GameLogicCheckers {
 
     selectPossibleCells(pieceElement, player) {
         let y = pieceElement.parentElement.dataset.cellY,
-            x = pieceElement.parentElement.dataset.cellX;
+            x = pieceElement.parentElement.dataset.cellX,
+            rightCell,
+            leftCell;
 
         if (player === 'player1') {
 
-            document.querySelector(`[data-cell-x='${x - 1}'][data-cell-y='${+y + 1}']`)
-                .className = 'selectedCell';
-            document.querySelector(`[data-cell-x='${+x + 1}'][data-cell-y='${+y + 1}']`)
-                .className = 'selectedCell'
+            rightCell = document
+                .querySelector(`[data-cell-x='${x - 1}'][data-cell-y='${+y + 1}']`);
+            leftCell = document
+                .querySelector(`[data-cell-x='${+x + 1}'][data-cell-y='${+y + 1}']`);
+
+            if (rightCell.dataset.occupied && leftCell.dataset.occupied) {
+                return "both cells are occupied";
+            }
+
+            rightCell.className = leftCell.className = 'selectedCell';
+
 
             return;
         }
+        rightCell = document
+            .querySelector(`[data-cell-x='${x - 1}'][data-cell-y='${y - 1}']`);
 
-        document.querySelector(`[data-cell-x='${x - 1}'][data-cell-y='${y - 1}']`)
-            .className = 'selectedCell';
+        leftCell = document
+            .querySelector(`[data-cell-x='${+x + 1}'][data-cell-y='${y - 1}']`);
 
-        document.querySelector(`[data-cell-x='${+x + 1}'][data-cell-y='${y - 1}']`)
-            .className = 'selectedCell'
+        console.log(rightCell)
+        if (rightCell.dataset.occupied && leftCell.dataset.occupied) {
+            return "both cells are occupied";
+        }
+
+        rightCell.className = leftCell.className = 'selectedCell';
 
     }
 
