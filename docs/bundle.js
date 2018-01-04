@@ -78,17 +78,23 @@ var _pieces = __webpack_require__(2);
 
 var _pieces2 = _interopRequireDefault(_pieces);
 
-var _gameLogic = __webpack_require__(3);
+var _gameLogicCheckers = __webpack_require__(4);
 
-var _gameLogic2 = _interopRequireDefault(_gameLogic);
+var _gameLogicCheckers2 = _interopRequireDefault(_gameLogicCheckers);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var createdChessBoard = new _board2.default('chessBoard');
 createdChessBoard.createChessBoard(0, 8);
 
-var pieces = new _pieces2.default(createdChessBoard);
-pieces.setAllPieces();
+// console.log (createdChessBoard)
+
+var chessBoardWithPieses = new _pieces2.default(createdChessBoard);
+chessBoardWithPieses.setAllPieces();
+
+var checkers = new _gameLogicCheckers2.default(chessBoardWithPieses);
+// console.log (chessBoardWithPieses)
+
 
 // console.log (createdChessBoard.chessBoard);
 
@@ -283,41 +289,11 @@ var Pieces = function () {
     function Pieces(createdChessBoard) {
         _classCallCheck(this, Pieces);
 
-        this.chessBoardWithPieces = createdChessBoard.chessBoardTable;
-        this.selectedPiece = undefined;
-        this.chessBoardWithPieces.addEventListener('click', this.selectPiece, false);
-        this.chessBoardWithPieces.addEventListener('click', this.selectPossibleCells, false);
+        // this.chessBoardWithPieces = createdChessBoard.chessBoardTable;
+        this.chessBoardWithPieces = createdChessBoard;
     }
 
     _createClass(Pieces, [{
-        key: 'selectPiece',
-        value: function selectPiece(e) {
-
-            e.target.classList.add('selectedPiece');
-            if (this.selectedPiece) {
-                this.selectedPiece.classList.remove('selectedPiece');
-                if (this.selectedPiece === e.target) {
-                    this.selectedPiece = undefined;
-                    return;
-                }
-            }
-            this.selectedPiece = e.target;
-        }
-    }, {
-        key: 'selectPossibleCells',
-        value: function selectPossibleCells(e) {
-
-            var el = e.target;
-            var y = el.parentElement.dataset.cellY;
-            var x = el.parentElement.dataset.cellX;
-
-            if (el.classList.contains('player1')) {
-                document.querySelector('[data-cell-x=\'' + (x - 1) + '\'][data-cell-y=\'' + (+y + 1) + '\']').className = 'selectedCell';
-
-                document.querySelector('[data-cell-x=\'' + (+x + 1) + '\'][data-cell-y=\'' + (+y + 1) + '\']').className = 'selectedCell';
-            }
-        }
-    }, {
         key: 'setAllPieces',
         value: function setAllPieces() {
             var setPositions = chessBoard.querySelectorAll('\n    #row0 td.brown,\n    #row1 td.brown,\n    #row2 td.brown,\n    #row5 td.brown,\n    #row6 td.brown,\n    #row7 td.brown');
@@ -360,7 +336,8 @@ var Pieces = function () {
 exports.default = Pieces;
 
 /***/ }),
-/* 3 */
+/* 3 */,
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -370,13 +347,58 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var gameLogic = function gameLogic() {
-    _classCallCheck(this, gameLogic);
-};
+var GameLogicCheckers = function () {
+    function GameLogicCheckers(chessBoardWithPieces) {
+        _classCallCheck(this, GameLogicCheckers);
 
-exports.default = gameLogic;
+        console.log(document.getElementById('chessBoard'));
+        this.selectedPiece = undefined;
+        document.getElementById('chessBoard').addEventListener('click', this.selectPiece, false);
+        // this.chessBoardWithPieces.addEventListener('click', this.selectPossibleCells, false);
+    }
+
+    _createClass(GameLogicCheckers, [{
+        key: 'selectPiece',
+        value: function selectPiece(e) {
+
+            if (e.target.tagName !== 'DIV') {
+                return;
+            }
+
+            e.target.classList.add('selectedPiece');
+            if (this.selectedPiece) {
+                this.selectedPiece.classList.remove('selectedPiece');
+                if (this.selectedPiece === e.target) {
+                    this.selectedPiece = undefined;
+                    return;
+                }
+            }
+            this.selectedPiece = e.target;
+        }
+    }, {
+        key: 'selectPossibleCells',
+        value: function selectPossibleCells(e) {
+
+            var el = e.target;
+            var y = el.parentElement.dataset.cellY;
+            var x = el.parentElement.dataset.cellX;
+
+            if (el.classList.contains('player1')) {
+                document.querySelector('[data-cell-x=\'' + (x - 1) + '\'][data-cell-y=\'' + (+y + 1) + '\']').className = 'selectedCell';
+
+                document.querySelector('[data-cell-x=\'' + (+x + 1) + '\'][data-cell-y=\'' + (+y + 1) + '\']').className = 'selectedCell';
+            }
+        }
+    }]);
+
+    return GameLogicCheckers;
+}();
+
+exports.default = GameLogicCheckers;
 
 /***/ })
 /******/ ]);
