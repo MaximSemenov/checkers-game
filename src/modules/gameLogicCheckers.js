@@ -1,44 +1,31 @@
 export default class GameLogicCheckers {
 
     constructor(chessBoardWithPieces) {
-        console.log(document.getElementById('chessBoard'))
         this.selectedPiece = undefined;
-        document.getElementById('chessBoard').addEventListener('click', this.selectPiece, false);
-        // this.chessBoardWithPieces.addEventListener('click', this.selectPossibleCells, false);
+
     }
 
-    selectPiece(e) {
 
-        if (e.target.tagName !== 'DIV') {
+    selectPossibleCells(pieceElement, player) {
+        let y = pieceElement.parentElement.dataset.cellY,
+            x = pieceElement.parentElement.dataset.cellX;
+
+        if (player === 'player1') {
+
+            document.querySelector(`[data-cell-x='${x - 1}'][data-cell-y='${+y + 1}']`)
+                .className = 'selectedCell';
+            document.querySelector(`[data-cell-x='${+x + 1}'][data-cell-y='${+y + 1}']`)
+                .className = 'selectedCell'
+
             return;
         }
 
-        e.target.classList.add('selectedPiece')
-        if (this.selectedPiece) {
-            this.selectedPiece.classList.remove('selectedPiece');
-            if (this.selectedPiece === e.target) {
-                this.selectedPiece = undefined
-                return;
-            }
-        }
-        this.selectedPiece = e.target;
-    }
+        document.querySelector(`[data-cell-x='${x - 1}'][data-cell-y='${y - 1}']`)
+            .className = 'selectedCell';
 
-    selectPossibleCells(e) {
+        document.querySelector(`[data-cell-x='${+x + 1}'][data-cell-y='${y - 1}']`)
+            .className = 'selectedCell'
 
-        const el = e.target;
-        let y = el.parentElement.dataset.cellY;
-        let x = el.parentElement.dataset.cellX;
-
-
-        if (el.classList.contains('player1')) {
-            document.querySelector(`[data-cell-x='${x - 1}'][data-cell-y='${+y + 1}']`)
-                .className = 'selectedCell';
-
-
-            document.querySelector(`[data-cell-x='${+x + 1}'][data-cell-y='${+y + 1}']`)
-                .className = 'selectedCell'
-        }
     }
 
 }

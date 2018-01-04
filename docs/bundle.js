@@ -95,10 +95,29 @@ chessBoardWithPieses.setAllPieces();
 var checkers = new _gameLogicCheckers2.default(chessBoardWithPieses);
 // console.log (chessBoardWithPieses)
 
+document.getElementById('chessBoard').addEventListener('click', distributeLogic, false);
 
-// console.log (createdChessBoard.chessBoard);
+function distributeLogic(e) {
 
-// this.createdChessBoard.addEventListener('click', () => alert ('helow'), false);
+    var el = e.target;
+    if (el.tagName !== 'DIV') {
+        return;
+    }
+    el.classList.add('selectedPiece');
+
+    if (this.selectedPiece) {
+        this.selectedPiece.classList.remove('selectedPiece');
+        if (this.selectedPiece === el) {
+            this.selectedPiece = undefined;
+            return;
+        }
+    }
+    this.selectedPiece = el;
+
+    var x = el.classList.contains('player1') ? checkers.selectPossibleCells(el, 'player1') : checkers.selectPossibleCells(el, 'player2');
+
+    console.log(x);
+}
 
 /***/ }),
 /* 1 */
@@ -355,43 +374,26 @@ var GameLogicCheckers = function () {
     function GameLogicCheckers(chessBoardWithPieces) {
         _classCallCheck(this, GameLogicCheckers);
 
-        console.log(document.getElementById('chessBoard'));
         this.selectedPiece = undefined;
-        document.getElementById('chessBoard').addEventListener('click', this.selectPiece, false);
-        // this.chessBoardWithPieces.addEventListener('click', this.selectPossibleCells, false);
     }
 
     _createClass(GameLogicCheckers, [{
-        key: 'selectPiece',
-        value: function selectPiece(e) {
+        key: 'selectPossibleCells',
+        value: function selectPossibleCells(pieceElement, player) {
+            var y = pieceElement.parentElement.dataset.cellY,
+                x = pieceElement.parentElement.dataset.cellX;
 
-            if (e.target.tagName !== 'DIV') {
+            if (player === 'player1') {
+
+                document.querySelector('[data-cell-x=\'' + (x - 1) + '\'][data-cell-y=\'' + (+y + 1) + '\']').className = 'selectedCell';
+                document.querySelector('[data-cell-x=\'' + (+x + 1) + '\'][data-cell-y=\'' + (+y + 1) + '\']').className = 'selectedCell';
+
                 return;
             }
 
-            e.target.classList.add('selectedPiece');
-            if (this.selectedPiece) {
-                this.selectedPiece.classList.remove('selectedPiece');
-                if (this.selectedPiece === e.target) {
-                    this.selectedPiece = undefined;
-                    return;
-                }
-            }
-            this.selectedPiece = e.target;
-        }
-    }, {
-        key: 'selectPossibleCells',
-        value: function selectPossibleCells(e) {
+            document.querySelector('[data-cell-x=\'' + (x - 1) + '\'][data-cell-y=\'' + (y - 1) + '\']').className = 'selectedCell';
 
-            var el = e.target;
-            var y = el.parentElement.dataset.cellY;
-            var x = el.parentElement.dataset.cellX;
-
-            if (el.classList.contains('player1')) {
-                document.querySelector('[data-cell-x=\'' + (x - 1) + '\'][data-cell-y=\'' + (+y + 1) + '\']').className = 'selectedCell';
-
-                document.querySelector('[data-cell-x=\'' + (+x + 1) + '\'][data-cell-y=\'' + (+y + 1) + '\']').className = 'selectedCell';
-            }
+            document.querySelector('[data-cell-x=\'' + (+x + 1) + '\'][data-cell-y=\'' + (y - 1) + '\']').className = 'selectedCell';
         }
     }]);
 
