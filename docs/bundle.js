@@ -107,6 +107,8 @@ function distributeLogic(e) {
 
     if (this.selectedPiece) {
         this.selectedPiece.classList.remove('selectedPiece');
+        checkers.rightCell.className = 'brown';
+        checkers.leftCell.className = 'brown';
         if (this.selectedPiece === el) {
             this.selectedPiece = undefined;
             return;
@@ -116,7 +118,7 @@ function distributeLogic(e) {
 
     var x = el.classList.contains('player1') ? checkers.selectPossibleCells(el, 'player1') : checkers.selectPossibleCells(el, 'player2');
 
-    console.log(x);
+    // console.log(x)
 }
 
 /***/ }),
@@ -374,40 +376,41 @@ var GameLogicCheckers = function () {
     function GameLogicCheckers(chessBoardWithPieces) {
         _classCallCheck(this, GameLogicCheckers);
 
-        this.selectedPiece = undefined;
+        this.isPossibleCellsSelected = false;
+        this.rightCell = null;
+        this.leftCell = null;
     }
 
     _createClass(GameLogicCheckers, [{
         key: 'selectPossibleCells',
         value: function selectPossibleCells(pieceElement, player) {
+
             var y = pieceElement.parentElement.dataset.cellY,
-                x = pieceElement.parentElement.dataset.cellX,
-                rightCell = void 0,
-                leftCell = void 0;
+                x = pieceElement.parentElement.dataset.cellX;
 
             if (player === 'player1') {
 
-                rightCell = document.querySelector('[data-cell-x=\'' + (x - 1) + '\'][data-cell-y=\'' + (+y + 1) + '\']');
-                leftCell = document.querySelector('[data-cell-x=\'' + (+x + 1) + '\'][data-cell-y=\'' + (+y + 1) + '\']');
+                this.rightCell = document.querySelector('[data-cell-x=\'' + (x - 1) + '\'][data-cell-y=\'' + (+y + 1) + '\']');
+                this.leftCell = document.querySelector('[data-cell-x=\'' + (+x + 1) + '\'][data-cell-y=\'' + (+y + 1) + '\']');
 
-                if (rightCell.dataset.occupied && leftCell.dataset.occupied) {
+                if (this.rightCell.dataset.occupied && this.leftCell.dataset.occupied) {
+                    this.rightCell = this.leftCell = null;
                     return "both cells are occupied";
                 }
 
-                rightCell.className = leftCell.className = 'selectedCell';
-
+                this.rightCell.className = this.leftCell.className = 'selectedCell';
                 return;
             }
-            rightCell = document.querySelector('[data-cell-x=\'' + (x - 1) + '\'][data-cell-y=\'' + (y - 1) + '\']');
+            this.rightCell = document.querySelector('[data-cell-x=\'' + (x - 1) + '\'][data-cell-y=\'' + (y - 1) + '\']');
 
-            leftCell = document.querySelector('[data-cell-x=\'' + (+x + 1) + '\'][data-cell-y=\'' + (y - 1) + '\']');
+            this.leftCell = document.querySelector('[data-cell-x=\'' + (+x + 1) + '\'][data-cell-y=\'' + (y - 1) + '\']');
 
-            console.log(rightCell);
-            if (rightCell.dataset.occupied && leftCell.dataset.occupied) {
+            if (this.rightCell.dataset.occupied && this.leftCell.dataset.occupied) {
+                this.rightCell = this.leftCell = null;
                 return "both cells are occupied";
             }
 
-            rightCell.className = leftCell.className = 'selectedCell';
+            this.rightCell.className = this.leftCell.className = 'selectedCell';
         }
     }]);
 

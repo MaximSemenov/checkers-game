@@ -28,6 +28,8 @@ function distributeLogic(e) {
 
     if (this.selectedPiece) {
         this.selectedPiece.classList.remove('selectedPiece');
+        checkers.rightCell.className = 'brown';
+        checkers.leftCell.className = 'brown';
         if (this.selectedPiece === el) {
             this.selectedPiece = undefined;
             return;
@@ -36,8 +38,7 @@ function distributeLogic(e) {
     this.selectedPiece = el;
 
 
-
     let x = el.classList.contains('player1') ? checkers.selectPossibleCells(el, 'player1') : checkers.selectPossibleCells(el, 'player2')
 
-    console.log(x)
+    // console.log(x)
 }
