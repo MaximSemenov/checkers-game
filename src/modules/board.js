@@ -6,8 +6,8 @@ export default class Chessboard {
         this.myCell = {
             cell: null,
             class: null
-
         };
+
 
 
         // this.chessBoard.addEventListener('click', this.setByClick.bind(this), false);
@@ -27,7 +27,7 @@ export default class Chessboard {
             let cell = document.createElement('td');
             cell.setAttribute('data-cell-x', cellYNumber);
             cell.setAttribute('data-cell-y', this.counter);
-            // cell.textContent = `x ${cellYNumber} y ${this.counter}`;
+            cell.textContent = `x ${cellYNumber} y ${this.counter}`;
 
             if (i % 2 === 0) {
                 cell.className = 'white'
