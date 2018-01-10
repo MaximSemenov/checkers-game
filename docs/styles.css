@@ -24,6 +24,7 @@ div {
     width: 50px;
     height: 50px;
     border-radius: 50%;
+    /* border: 2px solid cornsilk; */
     border: 2px solid dimgray;
     margin: auto;
     transition: border 500ms ease-out;
@@ -50,8 +51,11 @@ div:hover {
     background: radial-gradient(circle, antiquewhite, sienna, sandybrown);
 }
 
+
 .player2 {
-    background: radial-gradient(circle, antiquewhite, darkkhaki, wheat);
+    /* background: radial-gradient(circle, ghostwhite, wheat, antiquewhite); */
+    background: radial-gradient(circle, whitesmoke, wheat, antiquewhite);
+    border: 2px solid cornsilk;
 }
 
 td.white {

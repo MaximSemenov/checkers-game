@@ -68,8 +68,12 @@ function distributeLogic(e) {
     }
     this.selectedPiece = el;
 
+    let y = el.parentElement.dataset.cellY;
+    let x = el.parentElement.dataset.cellX;
 
-    let x = el.classList.contains('player1') ? checkers.selectPossibleCells(el, 'player1') : checkers.selectPossibleCells(el, 'player2')
 
-    console.log(x)
+    let z = el.classList.contains('player1') ? checkers.selectPossibleCells('player1', x, y) : checkers.selectPossibleCells('player2', x, y)
+
+    console.log('return from function -> ' + z)
 }
+
