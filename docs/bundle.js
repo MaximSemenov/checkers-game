@@ -145,7 +145,7 @@ function distributeLogic(e) {
 
     var z = el.classList.contains('player1') ? checkers.selectPossibleCells('player1', x, y) : checkers.selectPossibleCells('player2', x, y);
 
-    console.log('return from function -> ' + z);
+    console.log('return from \'selectPossibleCells\' function -> ' + z);
 }
 
 /***/ }),
@@ -463,23 +463,23 @@ var GameLogicCheckers = function () {
 
             if (this.rightCell.dataset.occupied && this.leftCell.dataset.occupied) {
 
-                return "player 1 -> both cells are occupied";
+                return player + ': both cells are occupied.';
             }
 
             if (this.rightCell.dataset.occupied) {
 
                 this.leftCell.className = 'selectedCell';
-                return "player 1 -> right cell is occupied";
+                return player + ': right cell is occupied.';
             }
 
             if (this.leftCell.dataset.occupied) {
 
                 this.rightCell.className = 'selectedCell';
-                return "player 1 -> left cell is occupied";
+                return player + ': left cell is occupied.';
             }
 
             this.rightCell.className = this.leftCell.className = 'selectedCell';
-            return "player 1 -> both cells are free";
+            return player + ': both cells are free.';
         }
     }]);
 

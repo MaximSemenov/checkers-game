@@ -63,23 +63,23 @@ export default class GameLogicCheckers {
 
         if (this.rightCell.dataset.occupied && this.leftCell.dataset.occupied) {
 
-            return "player 1 -> both cells are occupied";
+            return `${player}: both cells are occupied.`;
         }
 
         if (this.rightCell.dataset.occupied) {
 
             this.leftCell.className = 'selectedCell'
-            return "player 1 -> right cell is occupied";
+            return `${player}: right cell is occupied.`;
         }
 
         if (this.leftCell.dataset.occupied) {
 
             this.rightCell.className = 'selectedCell';
-            return "player 1 -> left cell is occupied";
+            return `${player}: left cell is occupied.`;
         }
 
         this.rightCell.className = this.leftCell.className = 'selectedCell';
-        return "player 1 -> both cells are free";
+        return `${player}: both cells are free.`;
 
     }
 

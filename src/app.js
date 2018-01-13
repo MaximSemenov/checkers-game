@@ -74,6 +74,6 @@ function distributeLogic(e) {
 
     let z = el.classList.contains('player1') ? checkers.selectPossibleCells('player1', x, y) : checkers.selectPossibleCells('player2', x, y)
 
-    console.log('return from function -> ' + z)
+    console.log(`return from 'selectPossibleCells' function -> ` + z)
 }
 
