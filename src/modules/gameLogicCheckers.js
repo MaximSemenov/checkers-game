@@ -9,7 +9,6 @@ export default class GameLogicCheckers {
         this.player2CoordinatesMap = ['+', '-', '-', '-'];
         this.calcMethods = {
             "-": function (coordinate, number) {
-                console.log(coordinate, number)
                 return coordinate - number;
             },
             "+": function (coordinate, number) {
@@ -62,14 +61,16 @@ export default class GameLogicCheckers {
 
 
         if (this.rightCell.dataset.occupied && this.leftCell.dataset.occupied) {
-
-            return `${player}: both cells are occupied.`;
+            console.log(`${player}: both cells are occupied.`);
+            return;
         }
 
         if (this.rightCell.dataset.occupied) {
 
-            this.leftCell.className = 'selectedCell'
-            return `${player}: right cell is occupied.`;
+            this.leftCell.className = 'selectedCell';
+            console.log(`${player}: right cell is occupied.`);
+            console.log(this.rightCell);
+            return this.rightCell;
         }
 
         if (this.leftCell.dataset.occupied) {
@@ -79,7 +80,8 @@ export default class GameLogicCheckers {
         }
 
         this.rightCell.className = this.leftCell.className = 'selectedCell';
-        return `${player}: both cells are free.`;
+        console.log(`${player}: both cells are free.`);
+        return false;
 
     }
 

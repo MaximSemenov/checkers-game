@@ -87,13 +87,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var createdChessBoard = new _board2.default('chessBoard');
 createdChessBoard.createChessBoard(0, 8);
 
-// console.log (createdChessBoard)
-
 var chessBoardWithPieses = new _pieces2.default(createdChessBoard);
 chessBoardWithPieses.setAllPieces();
 
 var checkers = new _gameLogicCheckers2.default(chessBoardWithPieses);
-// console.log (chessBoardWithPieses)
 
 document.getElementById('chessBoard').addEventListener('click', distributeLogic, false);
 
@@ -107,19 +104,14 @@ function distributeLogic(e) {
     }
 
     if (el.className === 'selectedCell') {
-        // console.log(el)
-        // console.log(el.className)
-        // console.log(this.selectedPiece)
 
         checkers.movePiece(el, this.selectedPiece);
-
         if (checkers.rightCell) {
             checkers.rightCell.className = 'brown';
         }
         if (checkers.leftCell) {
             checkers.leftCell.className = 'brown';
         }
-
         return;
     }
 
@@ -138,14 +130,18 @@ function distributeLogic(e) {
         checkers.rightCell.className = 'brown';
         checkers.leftCell.className = 'brown';
     }
+
     this.selectedPiece = el;
 
-    var y = el.parentElement.dataset.cellY;
-    var x = el.parentElement.dataset.cellX;
+    var y = el.parentElement.dataset.cellY,
+        x = el.parentElement.dataset.cellX,
+        capturable = el.classList.contains('player1') ? checkers.selectPossibleCells('player1', x, y) : checkers.selectPossibleCells('player2', x, y);
 
-    var z = el.classList.contains('player1') ? checkers.selectPossibleCells('player1', x, y) : checkers.selectPossibleCells('player2', x, y);
+    console.log('return from \'selectPossibleCells\' function: ' + capturable);
 
-    console.log('return from \'selectPossibleCells\' function -> ' + z);
+    if (capturable) {
+        checkers.selectPossibleCells('player2', eatable.dataset.cellX, eatable.dataset.cellY);
+    }
 }
 
 /***/ }),
@@ -409,7 +405,6 @@ var GameLogicCheckers = function () {
         this.player2CoordinatesMap = ['+', '-', '-', '-'];
         this.calcMethods = {
             "-": function _(coordinate, number) {
-                console.log(coordinate, number);
                 return coordinate - number;
             },
             "+": function _(coordinate, number) {
@@ -462,14 +457,16 @@ var GameLogicCheckers = function () {
             }
 
             if (this.rightCell.dataset.occupied && this.leftCell.dataset.occupied) {
-
-                return player + ': both cells are occupied.';
+                console.log(player + ': both cells are occupied.');
+                return;
             }
 
             if (this.rightCell.dataset.occupied) {
 
                 this.leftCell.className = 'selectedCell';
-                return player + ': right cell is occupied.';
+                console.log(player + ': right cell is occupied.');
+                console.log(this.rightCell);
+                return this.rightCell;
             }
 
             if (this.leftCell.dataset.occupied) {
@@ -479,7 +476,8 @@ var GameLogicCheckers = function () {
             }
 
             this.rightCell.className = this.leftCell.className = 'selectedCell';
-            return player + ': both cells are free.';
+            console.log(player + ': both cells are free.');
+            return false;
         }
     }]);
 

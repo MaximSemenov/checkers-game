@@ -5,14 +5,11 @@ import GameLogicCheckers from './modules/gameLogicCheckers';
 const createdChessBoard = new Chessboard('chessBoard');
 createdChessBoard.createChessBoard(0, 8);
 
-// console.log (createdChessBoard)
 
 const chessBoardWithPieses = new Pieces(createdChessBoard);
 chessBoardWithPieses.setAllPieces();
 
-
 const checkers = new GameLogicCheckers(chessBoardWithPieses);
-// console.log (chessBoardWithPieses)
 
 document.getElementById('chessBoard')
     .addEventListener('click', distributeLogic, false);
@@ -29,19 +26,14 @@ function distributeLogic(e) {
     }
 
     if (el.className === 'selectedCell') {
-        // console.log(el)
-        // console.log(el.className)
-        // console.log(this.selectedPiece)
 
         checkers.movePiece(el, this.selectedPiece);
-
         if (checkers.rightCell) {
             checkers.rightCell.className = 'brown';
         }
         if (checkers.leftCell) {
             checkers.leftCell.className = 'brown';
         }
-
         return;
 
     }
@@ -62,18 +54,18 @@ function distributeLogic(e) {
         this.selectedPiece.classList.remove('selectedPiece');
         checkers.rightCell.className = 'brown';
         checkers.leftCell.className = 'brown';
-
-
-
     }
+
     this.selectedPiece = el;
 
-    let y = el.parentElement.dataset.cellY;
-    let x = el.parentElement.dataset.cellX;
+    let y = el.parentElement.dataset.cellY,
+        x = el.parentElement.dataset.cellX,
+        capturable = el.classList.contains('player1') ? checkers.selectPossibleCells('player1', x, y) : checkers.selectPossibleCells('player2', x, y);
 
+    console.log(`return from 'selectPossibleCells' function: ` + capturable);
 
-    let z = el.classList.contains('player1') ? checkers.selectPossibleCells('player1', x, y) : checkers.selectPossibleCells('player2', x, y)
-
-    console.log(`return from 'selectPossibleCells' function -> ` + z)
+    if (capturable) {
+        checkers.selectPossibleCells('player2', eatable.dataset.cellX, eatable.dataset.cellY);
+    }
 }
 
