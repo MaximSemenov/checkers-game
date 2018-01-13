@@ -78,7 +78,7 @@ var _pieces = __webpack_require__(2);
 
 var _pieces2 = _interopRequireDefault(_pieces);
 
-var _gameLogicCheckers = __webpack_require__(4);
+var _gameLogicCheckers = __webpack_require__(3);
 
 var _gameLogicCheckers2 = _interopRequireDefault(_gameLogicCheckers);
 
@@ -383,8 +383,7 @@ var Pieces = function () {
 exports.default = Pieces;
 
 /***/ }),
-/* 3 */,
-/* 4 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -409,23 +408,21 @@ var GameLogicCheckers = function () {
         this.player1CoordinatesMap = ['-', '+', '+', '+'];
         this.player2CoordinatesMap = ['+', '-', '-', '-'];
         this.calcMethods = {
-            "-": function _(x, y) {
-                return x - y;
+            "-": function _(coordinate, number) {
+                console.log(coordinate, number);
+                return coordinate - number;
             },
-            "+": function _(x, y) {
-                return +x + +y;
+            "+": function _(coordinate, number) {
+                return +coordinate + +number;
             }
         };
     }
-
-    //// ADD 1 NUMBER IN FUNCTIONS
 
     _createClass(GameLogicCheckers, [{
         key: 'movePiece',
         value: function movePiece(cell, piece) {
 
             var parent = piece.parentElement;
-
             parent.removeChild(piece);
             parent.setAttribute('data-occupied', '');
             piece.classList.remove('selectedPiece');
@@ -438,13 +435,9 @@ var GameLogicCheckers = function () {
 
             var results = {},
                 i;
-
             for (i = 0; i < coordinates.length; i++) {
-                // console.log ('-----> ' + this.calcMethods[playerCoordinatesMap[i]](x,y))
-                results[this.coordinates[i]] = this.calcMethods[playerCoordinatesMap[i]](x, y);
-                // results[this.coordinates[i]] = playerCoordinatesMap[i];
+                results[this.coordinates[i]] = this.calcMethods[playerCoordinatesMap[i]](i % 2 === 0 ? x : y, 1);
             }
-            console.log(results);
             return results;
         }
     }, {
@@ -453,92 +446,40 @@ var GameLogicCheckers = function () {
 
             this.y = y;
             this.x = x;
-            var bbb = this.calcCoordinates(x, y, this.coordinates, player === 'player1' ? this.player1CoordinatesMap : this.player2CoordinatesMap);
-            console.log(player);
-            if (player === 'player1') {
+            var calcResults = this.calcCoordinates(x, y, this.coordinates, player === 'player1' ? this.player1CoordinatesMap : this.player2CoordinatesMap);
 
-                this.rightCell = document
-                // .querySelector(`[data-cell-x='${x - 1}'][data-cell-y='${+y + 1}']`);
-                .querySelector('[data-cell-x=\'' + bbb.rightCellX + '\'][data-cell-y=\'' + bbb.rightCellY + '\']');
-                this.leftCell = document
-                // .querySelector(`[data-cell-x='${+x + 1}'][data-cell-y='${+y + 1}']`);
-                .querySelector('[data-cell-x=\'' + bbb.leftCellX + '\'][data-cell-y=\'' + bbb.leftCellY + '\']');
+            this.rightCell = document.querySelector('[data-cell-x=\'' + calcResults.rightCellX + '\'][data-cell-y=\'' + calcResults.rightCellY + '\']');
+            this.leftCell = document.querySelector('[data-cell-x=\'' + calcResults.leftCellX + '\'][data-cell-y=\'' + calcResults.leftCellY + '\']');
 
-                console.log('rightCell -> ' + this.rightCell);
-                console.log('leftCell -> ' + this.leftCell);
+            if (this.x == 0) {
 
-                if (this.x == 0) {
-
-                    this.rightCell = this.leftCell;
-                }
-
-                if (this.x == 7) {
-
-                    this.leftCell = this.rightCell;
-                }
-
-                if (this.rightCell.dataset.occupied && this.leftCell.dataset.occupied) {
-
-                    return "player 1 -> both cells are occupied";
-                }
-
-                if (this.rightCell.dataset.occupied) {
-                    // this.rightCell = null;
-                    this.leftCell.className = 'selectedCell';
-                    return "player 1 -> right cell is occupied";
-                }
-
-                if (this.leftCell.dataset.occupied) {
-                    // this.leftCell = null;
-                    this.rightCell.className = 'selectedCell';
-                    return "player 1 -> left cell is occupied";
-                }
-
-                this.rightCell.className = this.leftCell.className = 'selectedCell';
-                return "player 1 -> both cells are free";
+                player === 'player1' ? this.rightCell = this.leftCell : this.leftCell = this.rightCell;
             }
 
-            // this.rightCell = document
-            //     .querySelector(`[data-cell-x='${+x + 1}'][data-cell-y='${y - 1}']`);
+            if (this.x == 7) {
 
-            // this.leftCell = document
-            //     .querySelector(`[data-cell-x='${x - 1}'][data-cell-y='${y - 1}']`);
+                player === 'player1' ? this.leftCell = this.rightCell : this.rightCell = this.leftCell;
+            }
 
+            if (this.rightCell.dataset.occupied && this.leftCell.dataset.occupied) {
 
-            // if (x == 0) {
+                return "player 1 -> both cells are occupied";
+            }
 
-            //     this.leftCell = this.rightCell
-            // }
+            if (this.rightCell.dataset.occupied) {
 
-            // if (x == 7) {
+                this.leftCell.className = 'selectedCell';
+                return "player 1 -> right cell is occupied";
+            }
 
-            //     this.rightCell = this.leftCell
-            // }
+            if (this.leftCell.dataset.occupied) {
 
-            // if (this.rightCell.dataset.occupied && this.leftCell.dataset.occupied) {
+                this.rightCell.className = 'selectedCell';
+                return "player 1 -> left cell is occupied";
+            }
 
-            //     return "player 2 -> both cells are occupied";
-
-            // }
-
-            // if (this.rightCell.dataset.occupied) {
-            //     // this.rightCell = null;
-            //     this.leftCell.className = 'selectedCell'
-
-            //     return "player 2 -> right cell is occupied";
-            // }
-
-            // // return  (this.leftCell.dataset.occupied) ? this.selectPossibleCells (this.leftCell, 'player2') : 1;
-
-            // if (this.leftCell.dataset.occupied) {
-
-            //     this.rightCell.className = 'selectedCell';
-            //     return "player 2 -> left cell is occupied";
-            // }
-
-            // this.rightCell.className = this.leftCell.className = 'selectedCell';
-            // return "player 2 -> both cells are free"
-
+            this.rightCell.className = this.leftCell.className = 'selectedCell';
+            return "player 1 -> both cells are free";
         }
     }]);
 
