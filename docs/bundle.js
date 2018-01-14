@@ -98,7 +98,6 @@ function distributeLogic(e) {
 
     var el = e.target;
 
-    // if (el.tagName !== 'DIV') {
     if (el.tagName !== 'DIV' && el.className !== 'selectedCell') {
         return;
     }
@@ -112,6 +111,7 @@ function distributeLogic(e) {
         if (checkers.leftCell) {
             checkers.leftCell.className = 'brown';
         }
+        el.className = 'brown';
         return;
     }
 
@@ -135,12 +135,12 @@ function distributeLogic(e) {
 
     var y = el.parentElement.dataset.cellY,
         x = el.parentElement.dataset.cellX,
-        capturable = el.classList.contains('player1') ? checkers.selectPossibleCells('player1', x, y) : checkers.selectPossibleCells('player2', x, y);
+        capturableCell = el.classList.contains('player1') ? checkers.selectPossibleCells('player1', x, y) : checkers.selectPossibleCells('player2', x, y);
 
-    console.log('return from \'selectPossibleCells\' function: ' + capturable);
+    // console.log(`return from 'selectPossibleCells' function: ` + capturable);
 
-    if (capturable) {
-        checkers.selectPossibleCells('player2', eatable.dataset.cellX, eatable.dataset.cellY);
+    if (capturableCell) {
+        capturableCell.className = 'selectedCell';
     }
 }
 
@@ -189,7 +189,7 @@ var Chessboard = function () {
                 var cell = document.createElement('td');
                 cell.setAttribute('data-cell-x', cellYNumber);
                 cell.setAttribute('data-cell-y', this.counter);
-                cell.textContent = 'x ' + cellYNumber + ' y ' + this.counter;
+                // cell.textContent = `x ${cellYNumber} y ${this.counter}`;
 
                 if (i % 2 === 0) {
                     cell.className = 'white';
@@ -400,15 +400,20 @@ var GameLogicCheckers = function () {
         this.isPossibleCellsSelected = false;
         this.rightCell = null;
         this.leftCell = null;
-        this.coordinates = ['rightCellX', 'rightCellY', 'leftCellX', 'leftCellY'];
+        this.coordinatesToMove = ['rightCellX', 'rightCellY', 'leftCellX', 'leftCellY'];
+        this.coordinatesToCapture = ['cellX', 'cellY'];
         this.player1CoordinatesMap = ['-', '+', '+', '+'];
         this.player2CoordinatesMap = ['+', '-', '-', '-'];
+        this.player2mapToCaptureRight = ['+', '-'];
+        this.player2mapToCaptureLeft = ['-', '-'];
+        this.player1mapToCaptureRight = ['-', '+'];
+        this.player1mapToCaptureLeft = ['+', '+'];
         this.calcMethods = {
             "-": function _(coordinate, number) {
                 return coordinate - number;
             },
             "+": function _(coordinate, number) {
-                return +coordinate + +number;
+                return +coordinate + number;
             }
         };
     }
@@ -431,9 +436,23 @@ var GameLogicCheckers = function () {
             var results = {},
                 i;
             for (i = 0; i < coordinates.length; i++) {
-                results[this.coordinates[i]] = this.calcMethods[playerCoordinatesMap[i]](i % 2 === 0 ? x : y, 1);
+                results[coordinates[i]] = this.calcMethods[playerCoordinatesMap[i]](i % 2 === 0 ? x : y, 1);
             }
             return results;
+        }
+    }, {
+        key: 'canBeCaptured',
+        value: function canBeCaptured(x, y, mapToCapture) {
+
+            var calcResults1 = this.calcCoordinates(x, y, this.coordinatesToCapture, mapToCapture);
+            console.log(calcResults1);
+            var cellToCapture = document.querySelector('[data-cell-x=\'' + calcResults1.cellX + '\'][data-cell-y=\'' + calcResults1.cellY + '\']');
+
+            if (cellToCapture.dataset.occupied) {
+                return false;
+            }
+
+            return cellToCapture;
         }
     }, {
         key: 'selectPossibleCells',
@@ -441,7 +460,7 @@ var GameLogicCheckers = function () {
 
             this.y = y;
             this.x = x;
-            var calcResults = this.calcCoordinates(x, y, this.coordinates, player === 'player1' ? this.player1CoordinatesMap : this.player2CoordinatesMap);
+            var calcResults = this.calcCoordinates(x, y, this.coordinatesToMove, player === 'player1' ? this.player1CoordinatesMap : this.player2CoordinatesMap);
 
             this.rightCell = document.querySelector('[data-cell-x=\'' + calcResults.rightCellX + '\'][data-cell-y=\'' + calcResults.rightCellY + '\']');
             this.leftCell = document.querySelector('[data-cell-x=\'' + calcResults.leftCellX + '\'][data-cell-y=\'' + calcResults.leftCellY + '\']');
@@ -462,21 +481,20 @@ var GameLogicCheckers = function () {
             }
 
             if (this.rightCell.dataset.occupied) {
-
-                this.leftCell.className = 'selectedCell';
                 console.log(player + ': right cell is occupied.');
-                console.log(this.rightCell);
-                return this.rightCell;
+                this.leftCell.className = 'selectedCell';
+                return this.canBeCaptured(calcResults.rightCellX, calcResults.rightCellY, player === 'player1' ? this.player1mapToCaptureRight : this.player2mapToCaptureRight);
             }
 
             if (this.leftCell.dataset.occupied) {
-
+                console.log(player + ': left cell is occupied.');
                 this.rightCell.className = 'selectedCell';
-                return player + ': left cell is occupied.';
+                return this.canBeCaptured(calcResults.leftCellX, calcResults.leftCellY, player === 'player1' ? this.player1mapToCaptureLeft : this.player2mapToCaptureLeft);
             }
 
             this.rightCell.className = this.leftCell.className = 'selectedCell';
             console.log(player + ': both cells are free.');
+            // return this.canBeCaptured(calcResults.rightCellX, calcResults.rightCellY, player === 'player1' ? this.player1CoordinatesMap : this.player2CoordinatesMap);
             return false;
         }
     }]);

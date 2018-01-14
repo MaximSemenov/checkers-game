@@ -17,10 +17,8 @@ document.getElementById('chessBoard')
 
 function distributeLogic(e) {
 
-
     const el = e.target;
 
-    // if (el.tagName !== 'DIV') {
     if (el.tagName !== 'DIV' && el.className !== 'selectedCell') {
         return;
     }
@@ -34,6 +32,7 @@ function distributeLogic(e) {
         if (checkers.leftCell) {
             checkers.leftCell.className = 'brown';
         }
+        el.className = 'brown';
         return;
 
     }
@@ -60,12 +59,13 @@ function distributeLogic(e) {
 
     let y = el.parentElement.dataset.cellY,
         x = el.parentElement.dataset.cellX,
-        capturable = el.classList.contains('player1') ? checkers.selectPossibleCells('player1', x, y) : checkers.selectPossibleCells('player2', x, y);
+        capturableCell = el.classList.contains('player1') ? checkers.selectPossibleCells('player1', x, y) : checkers.selectPossibleCells('player2', x, y);
 
-    console.log(`return from 'selectPossibleCells' function: ` + capturable);
+    // console.log(`return from 'selectPossibleCells' function: ` + capturable);
 
-    if (capturable) {
-        checkers.selectPossibleCells('player2', eatable.dataset.cellX, eatable.dataset.cellY);
+    if (capturableCell) {
+        capturableCell.className = 'selectedCell';
     }
+
 }
 

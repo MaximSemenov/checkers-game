@@ -27,7 +27,7 @@ export default class Chessboard {
             let cell = document.createElement('td');
             cell.setAttribute('data-cell-x', cellYNumber);
             cell.setAttribute('data-cell-y', this.counter);
-            cell.textContent = `x ${cellYNumber} y ${this.counter}`;
+            // cell.textContent = `x ${cellYNumber} y ${this.counter}`;
 
             if (i % 2 === 0) {
                 cell.className = 'white'
