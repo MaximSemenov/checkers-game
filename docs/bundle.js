@@ -455,6 +455,9 @@ var GameLogicCheckers = function () {
             return cellToCapture;
         }
     }, {
+        key: 'getCell',
+        value: function getCell(x, y, player, cell) {}
+    }, {
         key: 'selectPossibleCells',
         value: function selectPossibleCells(player, x, y) {
 

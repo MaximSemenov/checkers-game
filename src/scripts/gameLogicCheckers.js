@@ -56,6 +56,10 @@ export default class GameLogicCheckers {
         return cellToCapture;
     }
 
+    getCell (x, y, player, cell) {
+
+    }
+
     selectPossibleCells(player, x, y) {
 
         this.y = y;

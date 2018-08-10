@@ -1,6 +1,6 @@
-import Chessboard from './modules/board';
-import Pieces from './modules/pieces';
-import GameLogicCheckers from './modules/gameLogicCheckers';
+import Chessboard from './scripts/board';
+import Pieces from './scripts/pieces';
+import GameLogicCheckers from './scripts/gameLogicCheckers';
 
 const createdChessBoard = new Chessboard('chessBoard');
 createdChessBoard.createChessBoard(0, 8);
