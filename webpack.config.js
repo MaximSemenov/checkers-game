@@ -1,11 +1,12 @@
-var path = require('path');
+const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
     entry: './src/app',
-
     output: {
         path: path.resolve(__dirname, 'docs'),
-        filename: 'bundle.js'
+        filename: 'bundle.js',
+        publicPath: '/assets/'
     },
 
     module: {
@@ -15,21 +16,26 @@ module.exports = {
             {
                 test: /\.js$/,
                 use: [
-
                     {
                         loader: 'babel-loader',
                         options: {
                             presets: ['es2015']
                         }
                     }
-
                 ]
+            },
+
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
             }
-
-
-
         ]
-
-    }
+    },
+    plugins: [
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery'
+        })
+    ]
 };
 

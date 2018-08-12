@@ -2,6 +2,8 @@ import Chessboard from './scripts/board';
 import Pieces from './scripts/pieces';
 import GameLogicCheckers from './scripts/gameLogicCheckers';
 
+const css = require('./index.css');
+
 const createdChessBoard = new Chessboard('chessBoard');
 createdChessBoard.createChessBoard(0, 8);
 
