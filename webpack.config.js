@@ -1,5 +1,10 @@
 const path = require('path');
 const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const extractPlugin = new ExtractTextPlugin({
+    filename: 'styles.css'
+});
+
 module.exports = {
     entry: './src/app',
     output: {
@@ -25,17 +30,18 @@ module.exports = {
                 ]
             },
 
-            {
-                test: /\.css$/,
-                use: ['style-loader', 'css-loader']
-            },
+            // {
+            //     test: /\.css$/, // commented line for processing pure css, but at this moment sass is used
+            //     use: ['style-loader', 'css-loader']
+            // },
             {
                 test: /\.scss$/,
-                use: [
-                    'style-loader', // creates style nodes from JS strings
-                    'css-loader', // translates CSS into CommonJS
-                    'sass-loader' // compiles Sass to CSS, using Node Sass by default
-                ]
+                use: extractPlugin.extract({
+                    use: [
+                        'css-loader', // translates CSS into CommonJS
+                        'sass-loader' // compiles Sass to CSS, using Node Sass by default
+                    ]
+                })
             }
         ]
     },
@@ -43,7 +49,8 @@ module.exports = {
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery'
-        })
+        }),
+        extractPlugin
     ]
 };
 
