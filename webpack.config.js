@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-
 module.exports = {
     entry: './src/app',
     output: {
@@ -15,7 +14,7 @@ module.exports = {
 
             {
                 test: /\.js$/,
-                exclude: /node_modules/, 
+                exclude: /node_modules/,
                 use: [
                     {
                         loader: 'babel-loader',
@@ -29,6 +28,14 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: ['style-loader', 'css-loader']
+            },
+            {
+                test: /\.scss$/,
+                use: [
+                    'style-loader', // creates style nodes from JS strings
+                    'css-loader', // translates CSS into CommonJS
+                    'sass-loader' // compiles Sass to CSS, using Node Sass by default
+                ]
             }
         ]
     },
