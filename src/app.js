@@ -1,10 +1,7 @@
-import $ from 'jquery';
 import Chessboard from './scripts/board';
 import Pieces from './scripts/pieces';
 import GameLogicCheckers from './scripts/gameLogicCheckers';
 import './styles/sass/styles.scss'
-
-$('h1').html('Welcome to Checker game!');
 
 const createdChessBoard = new Chessboard('chessBoard');
 createdChessBoard.createChessBoard(0, 8);
@@ -64,8 +61,6 @@ function distributeLogic(e) {
     let y = el.parentElement.dataset.cellY,
         x = el.parentElement.dataset.cellX,
         capturableCell = el.classList.contains('player1') ? checkers.selectPossibleCells('player1', x, y) : checkers.selectPossibleCells('player2', x, y);
-
-    // console.log(`return from 'selectPossibleCells' function: ` + capturable);
 
     if (capturableCell) {
         capturableCell.className = 'selectedCell';
