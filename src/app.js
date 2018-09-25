@@ -1,7 +1,7 @@
 import Chessboard from './scripts/board';
 import Pieces from './scripts/pieces';
 import GameLogicCheckers from './scripts/gameLogicCheckers';
-import './styles/sass/styles.scss'
+import './styles/sass/main.scss'
 
 const createdChessBoard = new Chessboard('chessBoard');
 createdChessBoard.createChessBoard(0, 8);
