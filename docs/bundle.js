@@ -518,7 +518,7 @@ exports.default = GameLogicCheckers;
 /* 11 */
 /***/ (function(module, exports) {
 
-// removed by extract-text-webpack-plugin
+throw new Error("Module build failed: ModuleBuildError: Module build failed: \n@import\n^\n      File to import not found or unreadable: abstracts/variables.\n      in /Users/maximsemenov/Desktop/Web Development/Projects/Projects for Ivan/Checkers/src/styles/sass/main.scss (line 5, column 1)\n    at runLoaders (/Users/maximsemenov/Desktop/Web Development/Projects/Projects for Ivan/Checkers/node_modules/webpack/lib/NormalModule.js:195:19)\n    at /Users/maximsemenov/Desktop/Web Development/Projects/Projects for Ivan/Checkers/node_modules/loader-runner/lib/LoaderRunner.js:364:11\n    at /Users/maximsemenov/Desktop/Web Development/Projects/Projects for Ivan/Checkers/node_modules/loader-runner/lib/LoaderRunner.js:230:18\n    at context.callback (/Users/maximsemenov/Desktop/Web Development/Projects/Projects for Ivan/Checkers/node_modules/loader-runner/lib/LoaderRunner.js:111:13)\n    at Object.render [as callback] (/Users/maximsemenov/Desktop/Web Development/Projects/Projects for Ivan/Checkers/node_modules/sass-loader/lib/loader.js:52:13)\n    at Object.done [as callback] (/Users/maximsemenov/Desktop/Web Development/Projects/Projects for Ivan/Checkers/node_modules/neo-async/async.js:7974:18)\n    at options.error (/Users/maximsemenov/Desktop/Web Development/Projects/Projects for Ivan/Checkers/node_modules/node-sass/lib/index.js:294:32)");
 
 /***/ })
 /******/ ]);
