@@ -1,42 +1,17 @@
-
 @charset 'UTF-8';
-
-// 1. Configuration and helpers
-@import
-  'abstracts/variables',
-  'abstracts/functions',
-  'abstracts/mixins';
-
-// 2. Vendors
-@import
-  'vendor/normalize';
-
-// 3. Base stuff
-@import
-  'base/base',
-  'base/fonts',
-  'base/typography',
-  'base/helpers';
-
-// 4. Layout-related sections
-@import
-  'layout/header',
-  'layout/footer';
-
-// 5. Components
-@import
-  'components/button';
-
-// 6. Page-specific styles
-@import
-  'pages/home';
-
-// 7. Themes
-@import
-  'themes/default';
-
-
-
+@import 
+'1-abstracts/variables',
+'1-abstracts/mixins';
+@import 
+'2-vendor/normalize';
+@import 
+'3-base/base',
+'3-base/fonts';
+@import 
+'4-layout/header',
+'4-layout/footer';
+@import 
+'5-components/button';
 
 body {
     font-family: 'Encode Sans Expanded', sans-serif;
@@ -90,7 +65,6 @@ div:hover {
     background: radial-gradient(circle, antiquewhite, sienna, sandybrown);
 }
 
-
 .player2 {
     /* background: radial-gradient(circle, ghostwhite, wheat, antiquewhite); */
     background: radial-gradient(circle, whitesmoke, wheat, antiquewhite);
@@ -117,5 +91,4 @@ td.brown {
 
 ol {
     float: left;
-
 }
