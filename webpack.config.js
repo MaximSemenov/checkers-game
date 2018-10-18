@@ -1,9 +1,10 @@
 const path = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const extractPlugin = new ExtractTextPlugin({
-    filename: 'styles.css'
-});
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+// const ExtractTextPlugin = require('extract-text-webpack-plugin');
+// const extractPlugin = new ExtractTextPlugin({
+//     filename: 'styles.css'
+// });
 
 module.exports = {
     entry: './src/app',
@@ -19,12 +20,13 @@ module.exports = {
 
             {
                 test: /\.js$/,
-                exclude: /node_modules/,
+                exclude: /(node_modules|bower_components)/,
                 use: [
                     {
                         loader: 'babel-loader',
+
                         options: {
-                            presets: ['es2015']
+                            presets: ['@babel/preset-env']
                         }
                     }
                 ]
@@ -36,21 +38,38 @@ module.exports = {
             // },
             {
                 test: /\.scss$/,
-                use: extractPlugin.extract({
-                    use: [
-                        'css-loader', // translates CSS into CommonJS
-                        'sass-loader' // compiles Sass to CSS, using Node Sass by default
-                    ]
-                })
+
+                use: [
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                            // you can specify a publicPath here
+                            // by default it use publicPath in webpackOptions.output
+                            publicPath: '../'
+                        }
+                    },
+                    'css-loader',
+                    'sass-loader'
+                ]
+
             }
+
         ]
+
+
+
+
     },
     plugins: [
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery'
         }),
-        extractPlugin
+        new MiniCssExtractPlugin({
+            filename: "[name].css",
+            chunkFilename: "[id].css"
+          })
+
     ]
 };
 
